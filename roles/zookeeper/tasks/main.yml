@@ -23,7 +23,7 @@
   when: item.name == "zookeeper"
 
 
-- name: Symlink install directory
+- name: symlink install directory
   file: src={{ package_dir }}/{{ item.name }}-{{ item.version }} path={{ zk_link_dir }} state=link
   with_items: "{{ kafka_packages }}"
   when: item.name == "zookeeper"

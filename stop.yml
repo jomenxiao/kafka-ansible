@@ -21,6 +21,7 @@
 
         
   - hosts: zookeeper_servers
+    serial: 1
     tasks:
       - name: start zookeeper
         shell: cd {{ deploy_dir }}/scripts && ./run_zookeeper.sh stop
