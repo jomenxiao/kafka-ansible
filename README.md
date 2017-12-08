@@ -1,35 +1,102 @@
-## deploy kafka with ansible
-### modify inventory.ini file
-- zookeeper configure
+## Deploy Zookeeper/Kafka with Ansible
+**This repo is deploy Zookeeper/Kafka with Ansible**
+
+Default Version
+
+|Name|Version| 
+|:---:|:---:|
+|Zookeeper|3.4.11|
+|Kafka|2.12-1.0.0|
+
+Above information setting in repo file `roles/download/templates/kafka_packages.yml.j2`
+
+Do it
+------
+### Index
+1. [First of all](#First of all)
+2. [Modify inventory.ini file](#Modify inventory.ini file)
+3. [Prepare](#Prepare)
+4. [Deploy](#Deploy)
+5. [Start](#Start)
+6. [Stop](#Stop)
+7. [Manual start/stop](#Manual start/stop)
+8. [Test](#Test)
+
+
+### First of all
+- Install ansible
+	- deb `apt-get install ansible -y`
+	- rpm `yum install ansible -y`
+- Clone repo
+	- `git clone https://github.com/jomenxiao/kafka-ansible.git`
+- Change directoy
+	- `cd kafka-ansible`
+
+### Modify inventory.ini file
+- Zookeeper configure informations
 	- `myid` is unique integer,range 1-255; introduce documents:[URL](http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_configuration)
 	- `deploy_dir` deploy directory
+	- one line one process
 	- example: `zk_1 ansible_host=172.17.8.201  deploy_dir=/home/tidb/zk_deploy myid=1`
 
-- kafka configure
+- Kafka configure informations
 	- `kafka_port` for client connect 
 	- `id` is the kafka's broker. This must be set to a unique integer for each broker.
+	- one line one process
 	- example: `kafka1_1 ansible_host=172.17.8.201 deploy_dir=/home/tidb/kafka_deploy1 kafka_port=9091  id=1`
 	
 ### prepare 
+- Localhost create some directory for deploy 
+- Localhost create facts for deploy
+- Localhost create deploy directory 
+- Localhost Modify kernel params
+- Localhost download zookeeper/kafka
+- Remote host install necessary packages
+	- setting in repo directory `roles/packages/packagesfiles`
+	- example: java package
+
 `ansible-playbook -i inventory.ini prepare.yml`
 
 ### deploy
+- Deploy packages to remote host
+- Modify configure file 
+- generate start/stop scripts
+
 `ansible-playbook -i inventory.ini deploy.yml`
 
-### start
+### Start
+- Start zookeeper first
+- Start kafka
+ 
 `ansible-playbook -i inventory.ini start.yml`
 
-### stop
+### Stop
+- stop kafka first
+- stop zookeeper
+ 
 `ansible-playbook -i inventory.ini stop.yml`
 
-### expansion
-- add host to inventory.ini file
+### Manual start/stop
+- Zookeeper
+	- `cd $deploy_dir/scripts && ./run_zookeeper.sh start|status|stop"`
+- Kafka
+	- `cd $deploy_dir/scripts && ./run_kafka.sh start|stop"`
+	
+### Test
+- `tools` directory
+	- start consumer
+	`tools/kafka-console-consumer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test`
+	- start producer
+		`tools/kafka-console-producer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test -value=world -key=hello`
+		
+## Expansion
+- Add host to inventory.ini file
 - `ansible-playbook -i inventory.ini prepare.yml --diff`
 - `ansible-playbook -i inventory.ini deploy.yml --diff`
 - `ansible-playbook -i inventory.ini start.yml --diff`
 
-## directory structure
-### zookeeper
+## Deploy directory structure
+### Zookeeper
 ```
 zk_deploy/
 ├── backup
@@ -48,7 +115,7 @@ zk_deploy/
 └── zk -> /home/tidb/zk_deploy/package/zookeeper-3.4.11
 ```
 
-### kafka
+### Kafka
 ```
 kafka_deploy1/
 ├── backup
@@ -76,19 +143,5 @@ kafka_deploy1/
     └── run_kafka.sh
 ```
 
-### manual
-- zookeeper
-	- `cd $deploy_dir/scripts && ./run_zookeeper.sh start|status|stop"`
-- kafka
-	- `cd $deploy_dir/scripts && ./run_kafka.sh start|stop"`
-	
-### test
-- `tools` directory
-- two console
-	- start consumer
-	`tools/kafka-console-consumer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test`
-	- start producer
-		`tools/kafka-console-producer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test -value=world -key=hello`
-
-### attentions
-- restart kafka need 6 seconds interval
+### Attentions
+- **restart kafka need 6 seconds interval**
