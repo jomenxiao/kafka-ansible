@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+ulimit -n 1000000
+
+# WARNING: This file was auto-generated. Do not edit!
+#          All your edit might be overwritten!
+
+
+cd {{ deploy_dir }}/kafka/bin
+chmod +x ./kafka-server-start.sh  kafka-server-stop.sh
+if [[ "$1" == "start" ]];then
+    LOG_DIR={{ kafka_log_dir }} ./kafka-server-start.sh -daemon {{ deploy_dir }}/kafka/config/server.properties &
+elif [[ "$1" == "stop" ]];then
+    PID="$(ps auxwww |grep "{{ deploy_dir }}" |grep -i 'kafka\.Kafka' | grep java | grep -v grep | awk '{print $2}')"
+    if [ ${PID} -gt 0 ];then
+        kill -9 ${PID}
+    else
+        echo "{{ deploy_dir }} kakfa ont exist"
+    fi
+else
+    echo "can not know it $1"
+    exit -1
+fi
