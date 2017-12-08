@@ -86,9 +86,9 @@ kafka_deploy1/
 - `tools` directory
 - two console
 	- start consumer
-		`tools/kafka-console-consumer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test`
+	`tools/kafka-console-consumer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test`
 	- start producer
 		`tools/kafka-console-producer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test -value=world -key=hello`
 
-### attation
+### attentions
 - restart kafka need 6 seconds interval
