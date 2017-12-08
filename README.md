@@ -69,3 +69,9 @@ kafka_deploy1/
 └── scripts
     └── run_kafka.sh
 ```
+
+### manual
+- zookeeper
+	- `cd $deploy_dir/scripts && ./run_zookeeper.sh start|status|stop"`
+- kafka
+	- `cd $deploy_dir/scripts && ./run_kafka.sh start|stop"`
