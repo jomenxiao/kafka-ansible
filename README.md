@@ -95,7 +95,8 @@ Do it
 - `ansible-playbook -i inventory.ini deploy.yml --diff`
 - `ansible-playbook -i inventory.ini start.yml --diff`
 
-## Deploy directory structure
+Deploy directory structure
+------
 ### Zookeeper
 ```
 zk_deploy/
@@ -143,5 +144,6 @@ kafka_deploy1/
     └── run_kafka.sh
 ```
 
-### Attentions
+Attentions
+------
 - **restart kafka need 6 seconds interval**
