@@ -22,6 +22,12 @@
 ### stop
 `ansible-playbook -i inventory.ini stop.yml`
 
+### expansion
+- add host to inventory.ini file
+- `ansible-playbook -i inventory.ini prepare.yml --diff`
+- `ansible-playbook -i inventory.ini deploy.yml --diff`
+- `ansible-playbook -i inventory.ini start.yml --diff`
+
 ## directory structure
 ### zookeeper
 ```
@@ -75,3 +81,14 @@ kafka_deploy1/
 	- `cd $deploy_dir/scripts && ./run_zookeeper.sh start|status|stop"`
 - kafka
 	- `cd $deploy_dir/scripts && ./run_kafka.sh start|stop"`
+	
+### test
+- `tools` directory
+- two console
+	- start consumer
+		`tools/kafka-console-consumer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test`
+	- start producer
+		`tools/kafka-console-producer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test -value=world -key=hello`
+
+### attation
+- restart kafka need 6 seconds interval time

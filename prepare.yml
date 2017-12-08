@@ -31,3 +31,4 @@
   roles:
     - bootstrap
     - check_config_dynamic
+    - packages
