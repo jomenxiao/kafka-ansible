@@ -34,7 +34,7 @@ Do it
 
 ### Modify inventory.ini file
 - Zookeeper configure informations
-	- `myid` is unique integer,range 1-255; introduce documents:[URL](http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_configuration)
+	- `myid` is unique integer,range 1-255; introduce documents:[zookeeper office website](http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_configuration)
 	- `deploy_dir` deploy directory
 	- one line one process
 	- example: `zk_1 ansible_host=172.17.8.201  deploy_dir=/home/tidb/zk_deploy myid=1`
