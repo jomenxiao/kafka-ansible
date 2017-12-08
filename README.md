@@ -12,15 +12,15 @@ Above information setting in repo file `roles/download/templates/kafka_packages.
 
 Do it
 ------
-### Index
-1. [First of all](#First of all)
-2. [Modify inventory.ini file](#Modify inventory.ini file)
-3. [Prepare](#Prepare)
-4. [Deploy](#Deploy)
-5. [Start](#Start)
-6. [Stop](#Stop)
-7. [Manual start/stop](#Manual start/stop)
-8. [Test](#Test)
+1. First of all
+2. Modify inventory.ini file
+3. Prepare
+4. Deploy
+5. Start
+6. Stop
+7. Manual start/stop
+8. Test
+9. Expansion
 
 
 ### First of all
@@ -89,7 +89,7 @@ Do it
 	- start producer
 		`tools/kafka-console-producer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test -value=world -key=hello`
 		
-## Expansion
+### Expansion
 - Add host to inventory.ini file
 - `ansible-playbook -i inventory.ini prepare.yml --diff`
 - `ansible-playbook -i inventory.ini deploy.yml --diff`
