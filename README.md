@@ -91,4 +91,4 @@ kafka_deploy1/
 		`tools/kafka-console-producer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test -value=world -key=hello`
 
 ### attation
-- restart kafka need 6 seconds interval time
+- restart kafka need 6 seconds interval
