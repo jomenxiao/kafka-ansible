@@ -46,11 +46,11 @@ Do it
 	- example: `kafka1_1 ansible_host=172.17.8.201 deploy_dir=/home/tidb/kafka_deploy1 kafka_port=9091  id=1`
 	
 ### Prepare 
-- Localhost create some directory for deploy 
-- Localhost create facts for deploy
-- Localhost download zookeeper/kafka tar file
-- Remote host create deploy directory 
-- Remote host Modify kernel params
+- Localhost create some deployment directory
+- Localhost create ansible's facts 
+- Localhost download zookeeper/kafka file
+- Remote host create deployment directory 
+- Remote host modify kernel params
 - Remote host install necessary packages
 	- setting in repo directory `roles/packages/packagesfiles`
 	- example: java package
@@ -58,21 +58,21 @@ Do it
 `ansible-playbook -i inventory.ini prepare.yml`
 
 ### Deploy zookeeper/kafka
-- Deploy packages to remote host
-- Modify configure file 
-- generate start/stop scripts
+- Copy zookeeper/kafka deployment packages to remote host
+- Modify zookeeper/kafka's configure file 
+- generate zookeeper/kafka start/stop scripts
 
 `ansible-playbook -i inventory.ini deploy.yml`
 
 ### Start zookeeper/kafka
-- Start zookeeper first
+- First start zookeeper
 - Start kafka
  
 `ansible-playbook -i inventory.ini start.yml`
 
 ### Stop kafka/zookeeper
-- stop kafka first
-- stop zookeeper
+- Firest stop kafka
+- Stop zookeeper
  
 `ansible-playbook -i inventory.ini stop.yml`
 
@@ -83,14 +83,14 @@ Do it
 	- `cd $deploy_dir/scripts && ./run_kafka.sh start|stop"`
 	
 ### Test
-- `tools` directory
-	- start consumer
+- Ansible `tools` directory
+	- Start consumer
 	`tools/kafka-console-consumer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test`
-	- start producer
+	- Start producer
 		`tools/kafka-console-producer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test -value=world -key=hello`
 		
 ### Expansion zookeeper/kafka
-- Add host to inventory.ini file
+- Add host/process informations to inventory.ini file
 - `ansible-playbook -i inventory.ini prepare.yml --diff`
 - `ansible-playbook -i inventory.ini deploy.yml --diff`
 - `ansible-playbook -i inventory.ini start.yml --diff`
@@ -146,4 +146,4 @@ kafka_deploy1/
 
 Attentions
 ------
-- **restart kafka need 6 seconds interval**
+- **Restart kafka need 6 seconds interval**
