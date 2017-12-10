@@ -33,15 +33,15 @@ Do it
 	- `cd kafka-ansible`
 
 ### Modify inventory.ini file
-- Zookeeper configure informations
-	- `myid` is unique integer,range 1-255; introduce documents:[zookeeper office website](http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_configuration)
-	- `deploy_dir` deploy directory
+- Zookeeper informations
+	- `myid` is unique integer,range 1-255; documents:[zookeeper office website](http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_configuration)
+	- `deploy_dir` deployment directory
 	- one line mean one process
 	- example: `zk_1 ansible_host=172.17.8.201  deploy_dir=/home/tidb/zk_deploy myid=1`
 
-- Kafka configure informations
+- Kafka informations
 	- `kafka_port` for client connect 
-	- `id` is the kafka's broker id. This must be set to a unique integer for each broker.
+	- `id` is the kafka's broker id. It must be set to a unique integer for each broker.
 	- one line mean one process
 	- example: `kafka1_1 ansible_host=172.17.8.201 deploy_dir=/home/tidb/kafka_deploy1 kafka_port=9091  id=1`
 	
@@ -60,7 +60,7 @@ Do it
 ### Deploy zookeeper/kafka
 - Copy zookeeper/kafka deployment packages to remote host
 - Modify zookeeper/kafka's configure file 
-- generate zookeeper/kafka start/stop scripts
+- Generate zookeeper/kafka start/stop scripts
 
 `ansible-playbook -i inventory.ini deploy.yml`
 
