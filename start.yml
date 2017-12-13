@@ -26,8 +26,11 @@
         retries: 10
         delay: 15
 
-  - pause:
-      seconds: 6
+  - hosts: kafka_servers
+    tasks:
+      - name: wait zookeeper
+        pause:
+            seconds: 6
 
 
   - hosts: kafka_servers

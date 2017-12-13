@@ -89,7 +89,7 @@ Do it
 	- Start producer
 		`tools/kafka-console-producer -brokers="172.17.8.201:9091,172.17.8.201:9092,172.17.8.202:9091,172.17.8.202:9092,172.17.8.203:9091,172.17.8.203:9092" -topic=test -value=world -key=hello`
 		
-### Expansion zookeeper/kafka
+### Scale zookeeper/kafka
 - Add host/process informations to inventory.ini file
 - `ansible-playbook -i inventory.ini prepare.yml --diff`
 - `ansible-playbook -i inventory.ini deploy.yml --diff`
