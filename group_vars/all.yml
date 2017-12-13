@@ -5,6 +5,7 @@ package_dir: "{{ deploy_dir }}/package"
 
 
 # Local
+ansible_log_dir: "{{ playbook_dir }}/log"
 downloads_dir: "{{ playbook_dir }}/downloads"
 resources_dir: "{{ playbook_dir }}/resources"
 conf_dir: "{{ playbook_dir }}/conf"

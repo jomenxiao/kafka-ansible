@@ -16,14 +16,14 @@
   - hosts: kafka_servers
     serial: 1
     tasks:
-      - name: start kafka
+      - name: stop kafka
         shell: cd {{ deploy_dir }}/scripts && ./run_kafka.sh stop
 
         
   - hosts: zookeeper_servers
     serial: 1
     tasks:
-      - name: start zookeeper
+      - name: stop zookeeper
         shell: cd {{ deploy_dir }}/scripts && ./run_zookeeper.sh stop
 
 

@@ -26,6 +26,10 @@
         retries: 10
         delay: 15
 
+  - pause:
+      seconds: 6
+
+
   - hosts: kafka_servers
     serial: 1
     tasks:
